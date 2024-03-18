@@ -1,0 +1,104 @@
+a:link {
+    text-decoration: none;
+    }
+body{
+    width: 100%;
+    height: 100vh;
+    /* overflow: hidden; */
+    padding: 10px;
+    background: linear-gradient(to bottom, #68EACC 0%, #497BE8 100%);
+    }
+.first
+{
+    text-align: center;
+    background: #fff;
+    max-width: 600;
+    width: 30px auto;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 5px;
+    box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
+}
+input
+{
+border-radius:4px;
+padding: 8px 16px;
+font-size:16px;
+}
+/* #first{
+margin-top: 50px;
+} */
+.button1 {
+   width: 115px;
+   height: 25px;
+   margin-top: 25px;
+   background: #554bea;
+   border:none;
+   text-align: center;
+   border-radius: 5px;
+   font-weight: bold;
+   font-size:16px;
+   color: #fff;
+   font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+.button2 {
+   width: 115px;
+   height: 25px;
+   background: #0066ff;
+   color:white;
+   padding: 10px;
+   text-align: center;
+   border-radius: 5px;
+   font-weight: bold;
+   line-height: 25px;
+}
+.button3 {
+   width: 115px;
+   height: 25px;
+   background: red;
+   padding: 10px;
+   text-align: center;
+   border-radius: 5px;
+   color: white;
+   font-weight: bold;
+   line-height: 25px;
+}
+.label {
+ color: white;
+ padding: 8px;
+font-family: "Comic Sans MS", "Comic Sans", cursive;
+
+}
+.thick1{
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+.thick2{
+    font-weight: bold;font-size: 20px;
+    background-color: lightcyan;
+    color: black;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+.thick3{
+    font-weight: bold;font-size: 20px;
+    background-color: salmon;
+    color: black;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+.done {background-color: #04AA6D;}
+.pending {background-color: #ff9800;}
+table, td {
+ border: 1px none;
+ padding: 15px;
+ }
+table {
+ margin-left: auto;
+ margin-right: auto;
+}
+h1
+{
+color:#070606;
+font-family: "Comic Sans MS", "Comic Sans", cursive;
+}

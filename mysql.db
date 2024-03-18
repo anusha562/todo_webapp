@@ -1,0 +1,4 @@
+
+
+CREATE TABLE todo (     task_id INTEGER AUTO_INCREMENT PRIMARY KEY,     t
+ask_description VARCHAR(100),     day VARCHAR(100),     done BOOLEAN DEFAULT FALSE );
