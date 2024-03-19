@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://root:anusha%40123@localhost/curd'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
+app.secret_key = 'my_secret_key'  # a secret key for flashing messages
 db= SQLAlchemy(app)
 
 class Todo(db.Model):
@@ -27,17 +28,25 @@ def add():
     if request.method == "POST":
         name = request.form.get("name")
         day = request.form.get("day")
-        new_task=Todo(task_description=name,day=day,done=False)
-        db.session.add(new_task)
-        db.session.commit()
-    return redirect(url_for("index")),201
+        if not(len(name) <= 0 or len(day)<=0):
+            new_task=Todo(task_description=name,day=day,done=False)
+            db.session.add(new_task)
+            db.session.commit()
+            return redirect(url_for("index"))
+        elif (len(name) <= 0):
+            flash("Task cannot be empty", category='warning')
+            return redirect(url_for("index"))
+        elif (len(day) <= 0):
+            flash("Mention a day for the task", category='warning')
+            return redirect(url_for("index"))
 
 @app.route('/update/<int:todo_id>')
 def update(todo_id):
     todo= Todo.query.get(todo_id)
     todo.done=not todo.done
     db.session.commit()
-    return redirect(url_for("index"))
+    response = redirect(url_for("index"))
+    return response
 
 
 @app.route('/delete/<int:todo_id>')

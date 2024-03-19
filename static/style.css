@@ -2,12 +2,48 @@ a:link {
     text-decoration: none;
     }
 body{
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    margin: 0;
     width: 100%;
     height: 100vh;
-    /* overflow: hidden; */
     padding: 10px;
     background: linear-gradient(to bottom, #68EACC 0%, #497BE8 100%);
     }
+.container {
+    max-width: 600px;
+    margin: 100px auto;
+    text-align: center;
+}
+h1 {
+    color: #3d3ad3;
+    margin-bottom: 30px;
+}
+.tagline {
+    color: #000000;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+.btn {
+    padding: 12px 24px;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-size: 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.btn:hover {
+    background-color: #0056b3;
+}
+.flash-messages {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #f8d7da; /* Red background color for error messages */
+    color: #721c24; /* Dark red text color for error messages */
+}
 .first
 {
     text-align: center;

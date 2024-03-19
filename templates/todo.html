@@ -6,6 +6,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
 </head>
 <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="flash-messages">
+            <strong>{{ category }}</strong>: {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
 <div class="first" >
         <h1>Todo List!</h1>
         <form  action="/add" method="post">
