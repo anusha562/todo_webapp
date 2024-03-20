@@ -31,15 +31,15 @@ def add():
         if not(len(name) <= 0 or len(day)<=0):
             new_task=Todo(task_description=name,day=day,done=False)
             db.session.add(new_task)
-            db.session.commit()
-            return redirect(url_for("index"))
-        elif (len(name) <= 0):
+            db.session.commit()   
+            flash("Task added successfully", category='message')
+            return redirect(url_for("created"))
+        if (len(name) <= 0):
             flash("Task cannot be empty", category='warning')
-            return redirect(url_for("index"))
         elif (len(day) <= 0):
             flash("Mention a day for the task", category='warning')
-            return redirect(url_for("index"))
-
+        return redirect(url_for("bad_request"))
+        
 @app.route('/update/<int:todo_id>', methods=['PUT','POST'])
 def update(todo_id):
     todo = Todo.query.get(todo_id)
@@ -51,19 +51,38 @@ def update(todo_id):
         flash("Task updated successfully",category='message')
     else:
         flash("Task not found",category='error')
+        return redirect(url_for("error"))
     return redirect(url_for("index"))
 
 @app.route('/delete/<int:todo_id>',methods=['GET','DELETE'])
 def delete(todo_id):
-    todo = Todo.query.get(todo_id)
-    if todo:
-        todo= Todo.query.get(todo_id)
-        db.session.delete(todo)
-        db.session.commit()
-        flash("Task deleted successfully",category='message')
-    else:
-        flash("Task cannot be deleted successfully",category='error')
-    return redirect(url_for("index"))
+    if request.method == 'DELETE' or request.method == 'GET':
+        todo = Todo.query.get(todo_id)
+        if todo:
+            todo= Todo.query.get(todo_id)
+            db.session.delete(todo)
+            db.session.commit()
+            flash("Task deleted successfully",category='message')
+            return redirect(url_for("index"))
+        else:
+            flash("Task not found",category='error')
+            return redirect(url_for("error"))
+   
+@app.route('/bad_request')
+def bad_request():
+  todo_list = Todo.query.all()
+  return render_template('todo.html', todo_list=todo_list), 404
+
+@app.route('/created')
+def created():
+    todo_list = Todo.query.all()
+    return render_template('todo.html', todo_list=todo_list),201
+
+@app.route('/error')
+def error():
+  todo_list = Todo.query.all()
+  return render_template('todo.html', todo_list=todo_list), 400
+
 
 if __name__=='__main__':
     app.run(debug=True)
