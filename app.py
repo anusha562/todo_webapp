@@ -26,7 +26,7 @@ def index():
 @app.route('/add',methods=['POST'])
 def add():
     if request.method == "POST":
-        name = request.form.get("name")
+        name = request.form.get("task_description")
         day = request.form.get("day")
         if not(len(name) <= 0 or len(day)<=0):
             new_task=Todo(task_description=name,day=day,done=False)

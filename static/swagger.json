@@ -1,0 +1,169 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "description": "Swagger for TODO APP",
+      "version": "1.0.0",
+      "title": "Swagger for TODO App",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "tags": [
+        {
+          "name": "Products API",
+          "description": "Test API"
+        }
+      ],
+        "servers": [
+          {
+            "url": "http://127.0.0.1:5000"
+          }
+        ],
+        "paths": {
+          "/todo": {
+            "get": {
+              "summary": "Retrieve all todos",
+              "responses": {
+                "200": {
+                  "description": "Successful response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "task_id": {
+                              "type": "integer",
+                              "description": "The todo's unique identifier"
+                            },
+                            "task_description": {
+                              "type": "string",
+                              "description": "The description of the todo"
+                            },
+                            "day": {
+                              "type": "string",
+                              "description": "The day of the todo"
+                            },
+                            "done": {
+                              "type": "boolean",
+                              "description": "The status of the todo"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            },
+            "/add ":{
+            "post": {
+              "summary": "Create a new todo",
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "task_description": {
+                          "type": "string",
+                          "description": "The description of the todo"
+                        },
+                        "day": {
+                          "type": "string",
+                          "description": "The day of the todo"
+                        }
+                      },
+                      "required": ["task_description", "day"]
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "201": {
+                  "description": "Todo created successfully"
+                },
+                "400": {
+                  "description": "Invalid request body"
+                }
+              }
+            }
+            },
+          "/update/{todo_id}": {
+            "put": {
+              "summary": "Update a todo",
+              "parameters": [
+                {
+                  "name": "todo_id",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                    "type": "integer"
+                  },
+                  "description": "The ID of the todo to update"
+                }
+              ],
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "task_description": {
+                          "type": "string",
+                          "description": "The description of the todo"
+                        },
+                        "day": {
+                          "type": "string",
+                          "description": "The day of the todo"
+                        },
+                        "done": {
+                          "type": "boolean",
+                          "description": "The status of the todo"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "200": {
+                  "description": "Task updated successfully"
+                },
+                "400": {
+                  "description": "Invalid task ID"
+                }
+              }
+            }
+          },
+          "/delete/{todo_id}": {
+            "delete": {
+              "summary": "Delete a todo",
+              "parameters": [
+                {
+                  "name": "todo_id",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                    "type": "integer"
+                  },
+                  "description": "The ID of the task to delete"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Task deleted successfully"
+                },
+                "400": {
+                  "description": "Task not found"
+                }
+              }
+            }
+          }
+        }
+      }
