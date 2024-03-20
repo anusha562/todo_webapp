@@ -40,22 +40,30 @@ def add():
             flash("Mention a day for the task", category='warning')
             return redirect(url_for("index"))
 
-@app.route('/update/<int:todo_id>')
+@app.route('/update/<int:todo_id>', methods=['PUT','POST'])
 def update(todo_id):
-    todo= Todo.query.get(todo_id)
-    todo.done=not todo.done
-    db.session.commit()
-    response = redirect(url_for("index"))
-    return response
-
-
-@app.route('/delete/<int:todo_id>')
-def delete(todo_id):
-    todo= Todo.query.get(todo_id)
-    db.session.delete(todo)
-    db.session.commit()
+    todo = Todo.query.get(todo_id)
+    if todo:
+        todo.task_description = request.form.get('task_description')
+        todo.day = request.form.get('day')
+        todo.done = 'done' in request.form  # Check if 'done' checkbox is checked
+        db.session.commit()
+        flash("Task updated successfully",category='message')
+    else:
+        flash("Task not found",category='error')
     return redirect(url_for("index"))
 
+@app.route('/delete/<int:todo_id>',methods=['GET','DELETE'])
+def delete(todo_id):
+    todo = Todo.query.get(todo_id)
+    if todo:
+        todo= Todo.query.get(todo_id)
+        db.session.delete(todo)
+        db.session.commit()
+        flash("Task deleted successfully",category='message')
+    else:
+        flash("Task cannot be deleted successfully",category='error')
+    return redirect(url_for("index"))
 
 if __name__=='__main__':
     app.run(debug=True)
